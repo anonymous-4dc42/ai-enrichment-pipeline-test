@@ -1,0 +1,9 @@
+{
+  "ctx": 4096,
+  "top_p": 0.9,
+  "peek_chars": 10,
+  "peek_lines": 1000,
+  "temperature": 0.0,
+  "model_profile": "gemma3_12b",
+  "target_result_folder": "/srv/testbed/results/anonymous/default/2026-03-11_11-24-12_921597_anonymized"
+}

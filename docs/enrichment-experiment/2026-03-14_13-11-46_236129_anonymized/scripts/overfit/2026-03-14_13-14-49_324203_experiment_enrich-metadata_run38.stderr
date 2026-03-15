@@ -1,0 +1,10 @@
+
+real	1m42.594s
+user	0m1.215s
+sys	0m0.172s
+2026-03-14 15:13:44,322 ERROR    Unable to POST url: "http://172.16.0.1:5555/allocations/pos_upload/Anonymous_260314_131146_236129".
+Timeout
+2026-03-14 15:13:54,680 ERROR    Unable to POST url: "http://172.16.0.1:5555/allocations/pos_upload/Anonymous_260314_131146_236129".
+Timeout
+2026-03-14 15:14:05,149 ERROR    Unable to POST url: "http://172.16.0.1:5555/allocations/pos_upload/Anonymous_260314_131146_236129".
+Timeout

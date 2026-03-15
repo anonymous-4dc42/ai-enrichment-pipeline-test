@@ -1,0 +1,1 @@
+scp -r /home/Anonymous/experiments/ai-metadata-enricher overfit.anonymous.testbed:/root/ai-metadata-enricher

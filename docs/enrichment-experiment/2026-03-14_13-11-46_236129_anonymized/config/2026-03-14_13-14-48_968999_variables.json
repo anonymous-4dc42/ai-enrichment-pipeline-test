@@ -1,0 +1,34 @@
+{
+    "loop": {
+        "model_profile": [
+            "gpt_oss_20b",
+            "gpt_oss_120b",
+            "qwen25_14b",
+            "gemma3_12b"
+        ],
+        "ctx": [
+            4096,
+            8192
+        ],
+        "temperature": [
+            0.0
+        ],
+        "top_p": [
+            0.9
+        ],
+        "peek_lines": [
+            10,
+            1000
+        ],
+        "peek_chars": [
+            10,
+            500,
+            20000
+        ],
+        "target_result_folder": [
+            "/srv/testbed/results/anonymous/default/2026-03-11_11-24-12_921597_anonymized"
+        ]
+    },
+    "global": {},
+    "overfit": {}
+}

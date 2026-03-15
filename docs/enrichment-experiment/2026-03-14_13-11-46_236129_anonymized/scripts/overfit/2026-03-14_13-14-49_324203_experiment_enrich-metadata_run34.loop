@@ -1,0 +1,9 @@
+{
+  "ctx": 8192,
+  "top_p": 0.9,
+  "peek_chars": 500,
+  "peek_lines": 10,
+  "temperature": 0.0,
+  "model_profile": "qwen25_14b",
+  "target_result_folder": "/srv/testbed/results/anonymous/default/2026-03-11_11-24-12_921597_anonymized"
+}

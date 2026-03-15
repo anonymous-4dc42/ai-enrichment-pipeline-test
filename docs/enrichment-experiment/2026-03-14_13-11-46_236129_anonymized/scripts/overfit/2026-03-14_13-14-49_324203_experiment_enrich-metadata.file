@@ -1,0 +1,221 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+timestamp() {
+  date +"%Y-%m-%d %H:%M:%S"
+}
+
+log() {
+  if [ "$#" -eq 0 ] || [ -z "${*// }" ]; then
+    echo
+  else
+    printf '%s  %s\n' "$(timestamp)" "$*"
+  fi
+}
+
+PROJECT_DIR="${PROJECT_DIR:-/root/ai-metadata-enricher}"
+PACKAGE_DIR="${PACKAGE_DIR:-$PROJECT_DIR/ai_metadata_enricher}"
+
+MODEL_PROFILE="$(pos_get_variable model_profile --from-loop 2>/dev/null || true)"
+MODEL="$(pos_get_variable model --from-loop 2>/dev/null || true)"
+CTX="$(pos_get_variable ctx --from-loop 2>/dev/null || true)"
+TEMPERATURE="$(pos_get_variable temperature --from-loop 2>/dev/null || true)"
+TOP_P="$(pos_get_variable top_p --from-loop 2>/dev/null || true)"
+NUM_PREDICT="$(pos_get_variable num_predict --from-loop 2>/dev/null || true)"
+THINK="$(pos_get_variable think --from-loop 2>/dev/null || true)"
+PEEK_LINES="$(pos_get_variable peek_lines --from-loop)"
+PEEK_CHARS="$(pos_get_variable peek_chars --from-loop)"
+TARGET_RESULT_FOLDER="$(pos_get_variable target_result_folder --from-loop)"
+if [ "$TARGET_RESULT_FOLDER" != "/" ]; then
+  TARGET_RESULT_FOLDER="${TARGET_RESULT_FOLDER%/}"
+fi
+
+MANIFEST_PATH="/tmp/llm-enrichment-manifest.json"
+GPU_METRICS_PATH="/tmp/llm-enrichment-gpu-metrics.csv"
+rm -f "$MANIFEST_PATH"
+rm -f "$GPU_METRICS_PATH"
+enrich_rc=0
+
+NUM_PREDICT_LOG_VALUE="${NUM_PREDICT:-<ollama-default>}"
+MODEL_PROFILE_LOG_VALUE="${MODEL_PROFILE:-<none>}"
+MODEL_LOG_VALUE="${MODEL:-<profile-or-default>}"
+CTX_LOG_VALUE="${CTX:-<profile-or-default>}"
+TEMPERATURE_LOG_VALUE="${TEMPERATURE:-<profile-or-default>}"
+TOP_P_LOG_VALUE="${TOP_P:-<profile-or-default>}"
+THINK_LOG_VALUE="${THINK:-<profile-or-default-or-omitted>}"
+log "Loop params: model_profile=$MODEL_PROFILE_LOG_VALUE model=$MODEL_LOG_VALUE ctx=$CTX_LOG_VALUE temperature=$TEMPERATURE_LOG_VALUE top_p=$TOP_P_LOG_VALUE num_predict=$NUM_PREDICT_LOG_VALUE think=$THINK_LOG_VALUE peek_lines=$PEEK_LINES peek_chars=$PEEK_CHARS"
+log "Run manifest path: $MANIFEST_PATH"
+log "GPU metrics CSV path: $GPU_METRICS_PATH"
+log "Target result folder: $TARGET_RESULT_FOLDER"
+
+if [ ! -f "venv3/bin/activate" ]; then
+  log "ERROR: Python virtualenv not found at venv3/bin/activate."
+  enrich_rc=90
+elif [ ! -d "$PACKAGE_DIR" ]; then
+  log "ERROR: ai_metadata_enricher package not found at $PACKAGE_DIR."
+  enrich_rc=91
+elif [ ! -d "$TARGET_RESULT_FOLDER" ]; then
+  log "ERROR: target result folder not found: $TARGET_RESULT_FOLDER"
+  enrich_rc=92
+else
+  # shellcheck disable=SC1091
+  source venv3/bin/activate
+  export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"
+
+  RESOLVED_MODEL=""
+  if [ -n "$MODEL_PROFILE" ] || [ -n "$MODEL" ]; then
+    if RESOLVED_MODEL="$(
+      MODEL_PROFILE="$MODEL_PROFILE" MODEL="$MODEL" python3 - <<'PY'
+import os
+from ai_metadata_enricher.model_profiles import resolve_model_settings
+
+resolved = resolve_model_settings(
+    model_profile=os.environ.get("MODEL_PROFILE") or None,
+    model_profile_file=None,
+    model=os.environ.get("MODEL") or None,
+    ctx=None,
+    temperature=None,
+    top_p=None,
+    num_predict=None,
+    think=None,
+)
+print(resolved["model"])
+PY
+    )"; then
+      log "Resolved Ollama model for cleanup: $RESOLVED_MODEL"
+    else
+      RESOLVED_MODEL="${MODEL:-}"
+      log "WARN: failed to resolve effective model for cleanup; falling back to direct model value: ${RESOLVED_MODEL:-<none>}"
+    fi
+  fi
+
+  NUM_PREDICT_ARGS=()
+  if [ -n "$NUM_PREDICT" ]; then
+    NUM_PREDICT_ARGS=(--num-predict "$NUM_PREDICT")
+  fi
+  MODEL_PROFILE_ARGS=()
+  if [ -n "$MODEL_PROFILE" ]; then
+    MODEL_PROFILE_ARGS=(--model-profile "$MODEL_PROFILE")
+  fi
+  MODEL_ARGS=()
+  if [ -n "$MODEL" ]; then
+    MODEL_ARGS=(--model "$MODEL")
+  fi
+  CTX_ARGS=()
+  if [ -n "$CTX" ]; then
+    CTX_ARGS=(--ctx "$CTX")
+  fi
+  TEMPERATURE_ARGS=()
+  if [ -n "$TEMPERATURE" ]; then
+    TEMPERATURE_ARGS=(--temperature "$TEMPERATURE")
+  fi
+  TOP_P_ARGS=()
+  if [ -n "$TOP_P" ]; then
+    TOP_P_ARGS=(--top-p "$TOP_P")
+  fi
+  THINK_ARGS=()
+  if [ -n "$THINK" ]; then
+    THINK_ARGS=(--think "$THINK")
+  fi
+
+  set +e
+  time python3 -m ai_metadata_enricher.cli "$TARGET_RESULT_FOLDER" \
+    "${MODEL_PROFILE_ARGS[@]}" \
+    "${MODEL_ARGS[@]}" \
+    "${CTX_ARGS[@]}" \
+    "${TEMPERATURE_ARGS[@]}" \
+    "${TOP_P_ARGS[@]}" \
+    "${NUM_PREDICT_ARGS[@]}" \
+    "${THINK_ARGS[@]}" \
+    --peek-lines "$PEEK_LINES" \
+    --peek-chars "$PEEK_CHARS" \
+    --summary-json "$MANIFEST_PATH" \
+    --gpu-metrics-csv "$GPU_METRICS_PATH" \
+    --overwrite \
+    --force-title \
+    --force-description \
+    --force-keywords \
+    --verbose
+  enrich_rc=$?
+  set -e
+
+  if [ -n "$RESOLVED_MODEL" ]; then
+    if ollama stop "$RESOLVED_MODEL" >/dev/null 2>&1; then
+      log "Unloaded Ollama model after run: $RESOLVED_MODEL"
+    else
+      log "WARN: failed to unload Ollama model after run: $RESOLVED_MODEL"
+    fi
+  else
+    log "INFO: skipping Ollama unload because no resolved model name was available."
+  fi
+fi
+
+if [ "$enrich_rc" -ne 0 ]; then
+  log "WARN: enrichment failed with exit code $enrich_rc; creating fallback manifest and continuing."
+  cat >"$MANIFEST_PATH" <<EOF
+{
+  "status": "error",
+  "error": "enrich_cli_failed",
+  "exit_code": "$enrich_rc",
+  "model_profile": "$MODEL_PROFILE",
+  "model": "$MODEL",
+  "ctx": "$CTX",
+  "temperature": "$TEMPERATURE",
+  "top_p": "$TOP_P",
+  "num_predict": "$NUM_PREDICT_LOG_VALUE",
+  "think": "$THINK",
+  "peek_lines": "$PEEK_LINES",
+  "peek_chars": "$PEEK_CHARS",
+  "result_folder": "$TARGET_RESULT_FOLDER",
+  "timestamp_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+}
+EOF
+fi
+
+if [ -f "$MANIFEST_PATH" ]; then
+  if ! pos_upload --loop "$MANIFEST_PATH"; then
+    log "WARN: failed to upload manifest: $MANIFEST_PATH"
+  fi
+else
+  log "WARN: no manifest file found for upload: $MANIFEST_PATH"
+fi
+
+if [ -f "$GPU_METRICS_PATH" ]; then
+  if ! pos_upload --loop "$GPU_METRICS_PATH"; then
+    log "WARN: failed to upload GPU metrics CSV: $GPU_METRICS_PATH"
+  fi
+else
+  log "INFO: no GPU metrics CSV found to upload; likely a CPU run or unavailable nvidia-smi."
+fi
+
+if [ -d "$TARGET_RESULT_FOLDER" ]; then
+  TARGET_RESULT_BASENAME="$(basename "$TARGET_RESULT_FOLDER")"
+  UPLOAD_STAGING_ROOT="/tmp/llm-enrichment-upload"
+  UPLOAD_STAGING_PARENT_DIR="$UPLOAD_STAGING_ROOT/enriched_folder"
+  UPLOAD_STAGING_PARENT_DIR="${UPLOAD_STAGING_PARENT_DIR%/}"
+  UPLOAD_STAGING_DIR="$UPLOAD_STAGING_PARENT_DIR/$TARGET_RESULT_BASENAME"
+
+  mkdir -p "$UPLOAD_STAGING_ROOT"
+  mkdir -p "$UPLOAD_STAGING_PARENT_DIR"
+  rm -rf "$UPLOAD_STAGING_DIR"
+  cp -a "$TARGET_RESULT_FOLDER" "$UPLOAD_STAGING_PARENT_DIR/"
+
+  log "Final normalized upload folder path: $UPLOAD_STAGING_DIR"
+  log "Upload source passed to pos_upload: $UPLOAD_STAGING_PARENT_DIR"
+
+  if ! pos_upload --loop --recursive "$UPLOAD_STAGING_PARENT_DIR"; then
+    log "WARN: failed to upload staged result folder: $UPLOAD_STAGING_PARENT_DIR"
+  fi
+
+  rm -rf "$UPLOAD_STAGING_PARENT_DIR"
+else
+  log "WARN: skipping folder upload; folder not found: $TARGET_RESULT_FOLDER"
+fi
+
+rm -f "$MANIFEST_PATH"
+rm -f "$GPU_METRICS_PATH"
+
+if [ "$enrich_rc" -ne 0 ]; then
+  log "Loop run finished with non-fatal enrichment error (exit code $enrich_rc)."
+fi

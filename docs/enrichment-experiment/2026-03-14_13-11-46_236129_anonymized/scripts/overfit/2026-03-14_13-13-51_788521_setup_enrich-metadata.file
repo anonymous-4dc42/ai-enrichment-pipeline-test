@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export PATH="/usr/local/bin:/usr/bin:/bin:${PATH:-}"
+
+mkdir -p /data
+mountpoint -q /data || mount /dev/nvme0n1p3 /data
+mkdir -p /data/ollama
+export OLLAMA_MODELS=/data/ollama
+
+echo "### Updating package lists ###"
+apt update -y
+apt install -y python3.12-venv
+
+echo "### Installing required packages ###"
+python3 -m venv venv3
+source venv3/bin/activate
+pip install ollama pyyaml "rocrate @ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c"
+
+echo "### Checking Ollama installation ###"
+
+if ollama ps >/dev/null 2>&1; then
+  echo "Ollama is already installed and working."
+else
+  echo "Ollama not found. Installing now..."
+  curl -fsSL https://ollama.com/install.sh | sudo bash
+
+  if ! pgrep -f "ollama serve" >/dev/null 2>&1; then
+    nohup ollama serve >/tmp/ollama.log 2>&1 &
+  fi
+
+  echo "### Verifying Ollama installation ###"
+  ready=0
+  for i in {1..30}; do
+    if ollama ps >/dev/null 2>&1; then
+      ready=1
+      break
+    fi
+    sleep 1
+  done
+
+  if [ "$ready" -eq 1 ]; then
+    echo "Ollama installed successfully."
+  else
+    echo "Ollama installation failed (ollama ps returned non-zero)." >&2
+    echo "If this host has no systemd, check /tmp/ollama.log for startup errors." >&2
+    exit 1
+  fi
+fi

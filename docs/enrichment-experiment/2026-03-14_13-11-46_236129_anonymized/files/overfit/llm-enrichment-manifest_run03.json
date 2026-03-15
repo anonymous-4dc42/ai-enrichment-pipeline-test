@@ -1,0 +1,58 @@
+{
+  "generated_at_utc": "2026-03-14T12:25:35.590354+00:00",
+  "result_folder": "/srv/testbed/results/anonymous/default/2026-03-11_11-24-12_921597_anonymized",
+  "updated_entities": 994,
+  "elapsed_seconds": 93.285324,
+  "parameters": {
+    "model_profile": "gemma3_12b",
+    "model_profile_file": "/root/ai-metadata-enricher/config/model_profiles.yml",
+    "model": "gemma3:12b",
+    "ctx": 4096,
+    "temperature": 0.0,
+    "top_p": 0.9,
+    "num_predict": null,
+    "think": null,
+    "peek_lines": 10,
+    "peek_chars": 10,
+    "gpu_metrics_csv": true,
+    "gpu_metrics_interval_ms": 1000,
+    "overwrite": true,
+    "force_title": true,
+    "force_description": true,
+    "force_keywords": true
+  },
+  "llm_usage_summary": {
+    "calls_total": 39,
+    "calls_with_usage": 39,
+    "prompt_tokens": 53645,
+    "output_tokens": 1241,
+    "prompt_eval_seconds": 26.104435,
+    "eval_seconds": 46.180453,
+    "total_seconds": 92.487085,
+    "load_seconds": 18.051706,
+    "prompt_tokens_per_second": 2055.0147861686855,
+    "output_tokens_per_second": 26.8728413622129,
+    "usage_present": true
+  },
+  "gpu_metrics_summary": {
+    "status": "captured",
+    "csv_path": "/tmp/llm-enrichment-gpu-metrics.csv",
+    "interval_ms": 1000,
+    "monitor_returncode": 0,
+    "sample_count": 137,
+    "gpu_device_count": 1,
+    "device_indices": [
+      "0"
+    ],
+    "device_names": [
+      "NVIDIA GB10"
+    ],
+    "gpu_utilization_avg_pct": 49.511,
+    "gpu_utilization_max_pct": 96.0,
+    "memory_utilization_avg_pct": 0.0,
+    "memory_utilization_max_pct": 0.0,
+    "power_draw_avg_watts": 38.646,
+    "power_draw_max_watts": 85.14,
+    "temperature_max_c": 74.0
+  }
+}

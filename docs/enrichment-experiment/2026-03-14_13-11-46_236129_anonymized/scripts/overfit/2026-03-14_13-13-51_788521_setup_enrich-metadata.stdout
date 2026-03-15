@@ -1,0 +1,213 @@
+### Updating package lists ###
+Hit:1 https://ftp.fau.de/ubuntu-ports noble InRelease
+Get:2 https://ftp.fau.de/ubuntu-ports noble-security InRelease [126 kB]
+Get:3 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/sbsa  InRelease [1,579 B]
+Get:4 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble InRelease [5,422 B]
+Get:5 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates InRelease [5,463 B]
+Get:6 https://workbench.download.nvidia.com/stable/linux/debian default InRelease [7,745 B]
+Get:7 https://ftp.fau.de/ubuntu-ports noble-security/main arm64 Packages [1,667 kB]
+Get:8 https://ftp.fau.de/ubuntu-ports noble-security/main Translation-en [246 kB]
+Get:9 https://ftp.fau.de/ubuntu-ports noble-security/main arm64 c-n-f Metadata [10.3 kB]
+Get:10 https://ftp.fau.de/ubuntu-ports noble-security/multiverse arm64 Packages [34.9 kB]
+Get:11 https://ftp.fau.de/ubuntu-ports noble-security/multiverse Translation-en [6,732 B]
+Get:12 https://ftp.fau.de/ubuntu-ports noble-security/multiverse arm64 c-n-f Metadata [396 B]
+Get:13 https://ftp.fau.de/ubuntu-ports noble-security/restricted arm64 Packages [3,860 kB]
+Get:14 https://ftp.fau.de/ubuntu-ports noble-security/restricted Translation-en [622 kB]
+Get:15 https://ftp.fau.de/ubuntu-ports noble-security/restricted arm64 c-n-f Metadata [488 B]
+Get:16 https://ftp.fau.de/ubuntu-ports noble-security/universe arm64 Packages [979 kB]
+Get:17 https://ftp.fau.de/ubuntu-ports noble-security/universe Translation-en [219 kB]
+Get:18 https://ftp.fau.de/ubuntu-ports noble-security/universe arm64 c-n-f Metadata [20.3 kB]
+Hit:19 https://developer.download.nvidia.com/hpc-sdk/ubuntu/arm64  InRelease
+Get:20 https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/sbsa  Packages [1,201 kB]
+Get:21 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/common arm64 Packages [41.3 kB]
+Get:22 https://repo.download.nvidia.com/baseos/ubuntu/noble/arm64 noble-updates/dgx arm64 Packages [9,473 B]
+Ign:23 https://linux.mellanox.com/public/repo/doca/DGX_GBxx_latest_DOCA/ubuntu24.04/arm64-sbsa  InRelease
+Get:24 https://workbench.download.nvidia.com/stable/linux/debian default/proprietary arm64 Packages [2,409 B]
+Hit:25 https://linux.mellanox.com/public/repo/doca/DGX_GBxx_latest_DOCA/ubuntu24.04/arm64-sbsa  Release
+Fetched 9,066 kB in 2s (4,321 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+118 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libpython3.12-minimal libpython3.12-stdlib libpython3.12t64 python3-pip-whl
+  python3-setuptools-whl python3.12 python3.12-minimal
+Suggested packages:
+  python3.12-doc binfmt-support
+The following NEW packages will be installed:
+  python3-pip-whl python3-setuptools-whl python3.12-venv
+The following packages will be upgraded:
+  libpython3.12-minimal libpython3.12-stdlib libpython3.12t64 python3.12
+  python3.12-minimal
+5 upgraded, 3 newly installed, 0 to remove and 113 not upgraded.
+Need to get 10.5 MB of archives.
+After this operation, 2,782 kB of additional disk space will be used.
+Get:1 https://ftp.fau.de/ubuntu-ports noble-security/main arm64 libpython3.12t64 arm64 3.12.3-1ubuntu0.12 [2,282 kB]
+Get:2 https://ftp.fau.de/ubuntu-ports noble-security/main arm64 python3.12 arm64 3.12.3-1ubuntu0.12 [651 kB]
+Get:3 https://ftp.fau.de/ubuntu-ports noble-security/main arm64 libpython3.12-stdlib arm64 3.12.3-1ubuntu0.12 [2,037 kB]
+Get:4 https://ftp.fau.de/ubuntu-ports noble-security/main arm64 python3.12-minimal arm64 3.12.3-1ubuntu0.12 [2,252 kB]
+Get:5 https://ftp.fau.de/ubuntu-ports noble-security/main arm64 libpython3.12-minimal arm64 3.12.3-1ubuntu0.12 [834 kB]
+Get:6 https://ftp.fau.de/ubuntu-ports noble-security/universe arm64 python3-pip-whl all 24.0+dfsg-1ubuntu1.3 [1,707 kB]
+Get:7 https://ftp.fau.de/ubuntu-ports noble-security/universe arm64 python3-setuptools-whl all 68.1.2-2ubuntu1.2 [716 kB]
+Get:8 https://ftp.fau.de/ubuntu-ports noble-security/universe arm64 python3.12-venv arm64 3.12.3-1ubuntu0.12 [5,666 B]
+Fetched 10.5 MB in 0s (38.6 MB/s)
+(Reading database ... 
+(Reading database ... 5%
+(Reading database ... 10%
+(Reading database ... 15%
+(Reading database ... 20%
+(Reading database ... 25%
+(Reading database ... 30%
+(Reading database ... 35%
+(Reading database ... 40%
+(Reading database ... 45%
+(Reading database ... 50%
+(Reading database ... 55%
+(Reading database ... 60%
+(Reading database ... 65%
+(Reading database ... 70%
+(Reading database ... 75%
+(Reading database ... 80%
+(Reading database ... 85%
+(Reading database ... 90%
+(Reading database ... 95%
+(Reading database ... 100%
+(Reading database ... 136867 files and directories currently installed.)
+Preparing to unpack .../0-libpython3.12t64_3.12.3-1ubuntu0.12_arm64.deb ...
+Unpacking libpython3.12t64:arm64 (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.10) ...
+Preparing to unpack .../1-python3.12_3.12.3-1ubuntu0.12_arm64.deb ...
+Unpacking python3.12 (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.10) ...
+Preparing to unpack .../2-libpython3.12-stdlib_3.12.3-1ubuntu0.12_arm64.deb ...
+Unpacking libpython3.12-stdlib:arm64 (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.10) ...
+Preparing to unpack .../3-python3.12-minimal_3.12.3-1ubuntu0.12_arm64.deb ...
+Unpacking python3.12-minimal (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.10) ...
+Preparing to unpack .../4-libpython3.12-minimal_3.12.3-1ubuntu0.12_arm64.deb ...
+Unpacking libpython3.12-minimal:arm64 (3.12.3-1ubuntu0.12) over (3.12.3-1ubuntu0.10) ...
+Selecting previously unselected package python3-pip-whl.
+Preparing to unpack .../5-python3-pip-whl_24.0+dfsg-1ubuntu1.3_all.deb ...
+Unpacking python3-pip-whl (24.0+dfsg-1ubuntu1.3) ...
+Selecting previously unselected package python3-setuptools-whl.
+Preparing to unpack .../6-python3-setuptools-whl_68.1.2-2ubuntu1.2_all.deb ...
+Unpacking python3-setuptools-whl (68.1.2-2ubuntu1.2) ...
+Selecting previously unselected package python3.12-venv.
+Preparing to unpack .../7-python3.12-venv_3.12.3-1ubuntu0.12_arm64.deb ...
+Unpacking python3.12-venv (3.12.3-1ubuntu0.12) ...
+Setting up python3-setuptools-whl (68.1.2-2ubuntu1.2) ...
+Setting up python3-pip-whl (24.0+dfsg-1ubuntu1.3) ...
+Setting up libpython3.12-minimal:arm64 (3.12.3-1ubuntu0.12) ...
+Setting up python3.12-minimal (3.12.3-1ubuntu0.12) ...
+Setting up libpython3.12-stdlib:arm64 (3.12.3-1ubuntu0.12) ...
+Setting up python3.12 (3.12.3-1ubuntu0.12) ...
+Setting up libpython3.12t64:arm64 (3.12.3-1ubuntu0.12) ...
+Setting up python3.12-venv (3.12.3-1ubuntu0.12) ...
+Processing triggers for systemd (255.4-1ubuntu8.8) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+Processing triggers for libc-bin (2.39-0ubuntu8.6) ...
+### Installing required packages ###
+Collecting rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c
+  Cloning https://github.com/ResearchObject/ro-crate-py.git (to revision ce636014a58f24fa2d2eda05850ea0ea065f9f8c) to /tmp/pip-install-vnm7wu07/rocrate_e39b46db7fa9452794664baf0a984a44
+  Resolved https://github.com/ResearchObject/ro-crate-py.git to commit ce636014a58f24fa2d2eda05850ea0ea065f9f8c
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting ollama
+  Downloading ollama-0.6.1-py3-none-any.whl.metadata (4.3 kB)
+Collecting pyyaml
+  Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.4 kB)
+Collecting httpx>=0.27 (from ollama)
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting pydantic>=2.9 (from ollama)
+  Downloading pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 90.6/90.6 kB 5.3 MB/s eta 0:00:00
+Collecting requests (from rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+Collecting arcp==0.2.1 (from rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading arcp-0.2.1-py2.py3-none-any.whl.metadata (7.6 kB)
+Collecting jinja2 (from rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting python-dateutil (from rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting click (from rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting anyio (from httpx>=0.27->ollama)
+  Downloading anyio-4.12.1-py3-none-any.whl.metadata (4.3 kB)
+Collecting certifi (from httpx>=0.27->ollama)
+  Downloading certifi-2026.2.25-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx>=0.27->ollama)
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Collecting idna (from httpx>=0.27->ollama)
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.27->ollama)
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2.9->ollama)
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.41.5 (from pydantic>=2.9->ollama)
+  Downloading pydantic_core-2.41.5-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl.metadata (7.3 kB)
+Collecting typing-extensions>=4.14.1 (from pydantic>=2.9->ollama)
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic>=2.9->ollama)
+  Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (2.7 kB)
+Collecting six>=1.5 (from python-dateutil->rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting charset_normalizer<4,>=2 (from requests->rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading charset_normalizer-3.4.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl.metadata (39 kB)
+Collecting urllib3<3,>=1.21.1 (from requests->rocrate@ git+https://github.com/ResearchObject/ro-crate-py.git@ce636014a58f24fa2d2eda05850ea0ea065f9f8c)
+  Downloading urllib3-2.6.3-py3-none-any.whl.metadata (6.9 kB)
+Downloading ollama-0.6.1-py3-none-any.whl (14 kB)
+Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (775 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 775.1/775.1 kB 30.4 MB/s eta 0:00:00
+Downloading arcp-0.2.1-py2.py3-none-any.whl (15 kB)
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.5/73.5 kB 69.2 MB/s eta 0:00:00
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 78.8/78.8 kB 72.7 MB/s eta 0:00:00
+Downloading pydantic-2.12.5-py3-none-any.whl (463 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 463.6/463.6 kB 112.7 MB/s eta 0:00:00
+Downloading pydantic_core-2.41.5-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl (1.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.9/1.9 MB 95.6 MB/s eta 0:00:00
+Downloading click-8.3.1-py3-none-any.whl (108 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 108.3/108.3 kB 90.7 MB/s eta 0:00:00
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 134.9/134.9 kB 106.6 MB/s eta 0:00:00
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 107.2 MB/s eta 0:00:00
+Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 64.7/64.7 kB 61.4 MB/s eta 0:00:00
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading certifi-2026.2.25-py3-none-any.whl (153 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 153.7/153.7 kB 119.6 MB/s eta 0:00:00
+Downloading charset_normalizer-3.4.5-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (189 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 189.4/189.4 kB 131.7 MB/s eta 0:00:00
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 71.0/71.0 kB 67.2 MB/s eta 0:00:00
+Downloading markupsafe-3.0.3-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl (24 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 44.6/44.6 kB 42.2 MB/s eta 0:00:00
+Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Downloading urllib3-2.6.3-py3-none-any.whl (131 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 131.6/131.6 kB 108.4 MB/s eta 0:00:00
+Downloading anyio-4.12.1-py3-none-any.whl (113 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.6/113.6 kB 92.3 MB/s eta 0:00:00
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Building wheels for collected packages: rocrate
+  Building wheel for rocrate (pyproject.toml): started
+  Building wheel for rocrate (pyproject.toml): finished with status 'done'
+  Created wheel for rocrate: filename=rocrate-0.14.2-py3-none-any.whl size=344726 sha256=d5c2233f008ebe08864dbdcde8da59ceecfe0e0ccb89a100726811b88c7953ab
+  Stored in directory: /root/.cache/pip/wheels/f7/11/15/130cb14095c209c7ce8d8871ed7e49fc3e54b5e7ba71e6f2c0
+Successfully built rocrate
+Installing collected packages: arcp, urllib3, typing-extensions, six, pyyaml, MarkupSafe, idna, h11, click, charset_normalizer, certifi, annotated-types, typing-inspection, requests, python-dateutil, pydantic-core, jinja2, httpcore, anyio, rocrate, pydantic, httpx, ollama
+Successfully installed MarkupSafe-3.0.3 annotated-types-0.7.0 anyio-4.12.1 arcp-0.2.1 certifi-2026.2.25 charset_normalizer-3.4.5 click-8.3.1 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.11 jinja2-3.1.6 ollama-0.6.1 pydantic-2.12.5 pydantic-core-2.41.5 python-dateutil-2.9.0.post0 pyyaml-6.0.3 requests-2.32.5 rocrate-0.14.2 six-1.17.0 typing-extensions-4.15.0 typing-inspection-0.4.2 urllib3-2.6.3
+### Checking Ollama installation ###
+Ollama not found. Installing now...
+WARNING: systemd is not running
+### Verifying Ollama installation ###
+Ollama installed successfully.
