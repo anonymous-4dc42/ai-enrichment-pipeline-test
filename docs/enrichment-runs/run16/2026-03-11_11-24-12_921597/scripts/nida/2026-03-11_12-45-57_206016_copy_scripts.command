@@ -1,0 +1,1 @@
+scp -r /srv/testbed/results/anonymous/default/2026-03-11_11-24-12_921597/scripts nida.anonymous.testbed:/root/evaluation
